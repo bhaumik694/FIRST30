@@ -38,7 +38,7 @@ function Insights() {
         <p className="mt-3 text-xs text-muted-foreground">Based only on what you logged in {list.length} check-ins. Not a measurement of your skin.</p>
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[1, 7, 14, 30].map((m) => {
           const ci = list.find((c) => c.day === m);
           const ph = photos?.find((p) => p.day === m);

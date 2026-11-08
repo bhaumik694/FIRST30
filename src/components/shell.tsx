@@ -51,7 +51,7 @@ export function Shell({ children }: { children: ReactNode }) {
         {NAV.map((n) => (
           <Link key={n.to} to={n.to} className={`flex flex-col items-center gap-1 py-2.5 text-[10px] ${path === n.to ? "text-primary" : "text-muted-foreground"}`}>
             <n.icon className="h-5 w-5" />
-            {n.label.split(" ")[0]}
+            {n.label === "My Journey" ? "Journey" : n.label.split(" ")[0]}
           </Link>
         ))}
       </nav>
