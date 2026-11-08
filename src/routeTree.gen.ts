@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as PhotosRouteImport } from './routes/photos'
 import { Route as ProfileRouteImport } from './routes/profile'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const JourneyRoute = JourneyRouteImport.update({
   path: '/journey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhotosRoute = PhotosRouteImport.update({
+  id: '/photos',
+  path: '/photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/guide': typeof GuideRoute
   '/insights': typeof InsightsRoute
   '/journey': typeof JourneyRoute
+  '/photos': typeof PhotosRoute
   '/profile': typeof ProfileRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/guide': typeof GuideRoute
   '/insights': typeof InsightsRoute
   '/journey': typeof JourneyRoute
+  '/photos': typeof PhotosRoute
   '/profile': typeof ProfileRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,22 @@ export interface FileRoutesById {
   '/guide': typeof GuideRoute
   '/insights': typeof InsightsRoute
   '/journey': typeof JourneyRoute
+  '/photos': typeof PhotosRoute
   '/profile': typeof ProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/guide' | '/insights' | '/journey' | '/profile'
+  fullPaths: '/' | '/guide' | '/insights' | '/journey' | '/photos' | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/guide' | '/insights' | '/journey' | '/profile'
-  id: '__root__' | '/' | '/guide' | '/insights' | '/journey' | '/profile'
+  to: '/' | '/guide' | '/insights' | '/journey' | '/photos' | '/profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/guide'
+    | '/insights'
+    | '/journey'
+    | '/photos'
+    | '/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +92,7 @@ export interface RootRouteChildren {
   GuideRoute: typeof GuideRoute
   InsightsRoute: typeof InsightsRoute
   JourneyRoute: typeof JourneyRoute
+  PhotosRoute: typeof PhotosRoute
   ProfileRoute: typeof ProfileRoute
 }
 
@@ -109,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JourneyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/photos': {
+      id: '/photos'
+      path: '/photos'
+      fullPath: '/photos'
+      preLoaderRoute: typeof PhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -124,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuideRoute: GuideRoute,
   InsightsRoute: InsightsRoute,
   JourneyRoute: JourneyRoute,
+  PhotosRoute: PhotosRoute,
   ProfileRoute: ProfileRoute,
 }
 export const routeTree = rootRouteImport

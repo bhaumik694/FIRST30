@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Data is device-local: profile/check-ins in localStorage, photos in IndexedDB (`src/lib/store.ts`) — no login required for the prototype.
+- Recommendations come from the pure rule engine in `src/lib/engine.ts` (tested in `src/test/engine.test.ts`); safety rules must stay first and must never be overridden.
+- Real OpenCV processing lives only in the separate FastAPI service under `backend/`; the browser fallback must always be labelled "not OpenCV".
