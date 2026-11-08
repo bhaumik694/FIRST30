@@ -36,7 +36,7 @@ function PhotosPage() {
 
   useEffect(() => {
     if (!list || list.length === 0) return;
-    if (!a || !list.find((p) => p.id === a)) setA(list[0].id);
+    if (!a || !list.find((p) => p.id === a)) setA(list[0]!.id);
     if (!b || !list.find((p) => p.id === b)) setB(list.at(-1)!.id);
   }, [list, a, b]);
 
@@ -60,8 +60,9 @@ function PhotosPage() {
 
   async function handle(f?: File) {
     if (!f) return;
+    void 0;
     const err = validateFile(f);
-    if (err) return toast.error(err);
+    if (err) { toast.error(err); return; }
     setBusy(true);
     try {
       const dataUrl = await fileToResizedDataUrl(f);
@@ -125,7 +126,7 @@ function PhotosPage() {
           <div className="flex flex-wrap gap-2 text-xs">
             {[7, 14, 30].map((m) => {
               const t = list.find((p) => p.day >= m);
-              return <button key={m} disabled={!t} onClick={() => { setA(list[0].id); setB(t!.id); }} className="rounded-full border border-border px-3 py-1 disabled:opacity-40">Day 1 vs Day {m}</button>;
+              return <button key={m} disabled={!t} onClick={() => { setA(list[0]!.id); setB(t!.id); }} className="rounded-full border border-border px-3 py-1 disabled:opacity-40">Day 1 vs Day {m}</button>;
             })}
           </div>
           {mode === "slider" ? <Slider a={pa} b={pb} /> : (
@@ -160,7 +161,7 @@ function PhotosPage() {
   );
 }
 
-function PhotoSelect({ list, value, onChange }: { list: Photo[]; value?: string; onChange: (v: string) => void }) {
+function PhotoSelect({ list, value, onChange }: { list: Photo[]; value?: string | undefined; onChange: (v: string) => void }) {
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)} className="rounded-full border border-input bg-card px-3 py-1.5 text-sm">
       {list.map((p) => <option key={p.id} value={p.id}>Day {p.day} · {p.date}</option>)}
@@ -182,7 +183,7 @@ function Slider({ a, b }: { a: Photo; b: Photo }) {
   );
 }
 
-function QualityBadges({ q }: { q?: QualityReport }) {
+function QualityBadges({ q }: { q?: QualityReport | undefined }) {
   if (!q) return null;
   const item = (label: string, ok: boolean, text: string) => (
     <div className="flex justify-between text-xs"><span className="text-muted-foreground">{label}</span><span className={ok ? "text-primary" : "text-destructive"}>{text}</span></div>

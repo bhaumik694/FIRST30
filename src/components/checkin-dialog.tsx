@@ -25,7 +25,7 @@ function Chips<T extends string | number>({ value, options, onChange }: { value:
 
 const sev = SEVERITY_LABELS.map((l, i) => ({ v: i as Severity, l }));
 
-export function CheckInDialog({ open, onOpenChange, profile, existing }: { open: boolean; onOpenChange: (o: boolean) => void; profile: Profile; existing?: CheckIn }) {
+export function CheckInDialog({ open, onOpenChange, profile, existing }: { open: boolean; onOpenChange: (o: boolean) => void; profile: Profile; existing?: CheckIn | undefined }) {
   const today = toISODate(new Date());
   const init = (): CheckIn =>
     existing ?? {

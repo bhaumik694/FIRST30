@@ -28,7 +28,7 @@ export interface CheckIn {
   burning: Severity;
   breakouts: Breakouts;
   comfort: Comfort;
-  visibleChange?: "none" | "some" | "unsure";
+  visibleChange?: "none" | "some" | "unsure" | undefined;
   notes: string;
 }
 
@@ -49,9 +49,9 @@ export interface Photo {
   date: string;
   day: number;
   dataUrl: string;
-  normalizedUrl?: string;
-  illustrative?: boolean;
-  quality?: QualityReport;
+  normalizedUrl?: string | undefined;
+  illustrative?: boolean | undefined;
+  quality?: QualityReport | undefined;
 }
 
 export interface Recommendation {

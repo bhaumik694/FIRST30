@@ -78,7 +78,7 @@ export const PRODUCTS: ProductInfo[] = [
 ];
 
 export function getProduct(id: ProductId) {
-  return PRODUCTS.find((p) => p.id === id) ?? PRODUCTS[3];
+  return PRODUCTS.find((p) => p.id === id) ?? PRODUCTS[3]!;
 }
 
 export function productName(p: Profile) {

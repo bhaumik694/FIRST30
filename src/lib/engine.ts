@@ -94,12 +94,12 @@ export function recommend(profile: Profile, checkIns: CheckIn[], today = new Dat
   }
 
   // 2. Increasing dryness
-  const dryTrend = recent3.length >= 2 && recent3.every((c, i) => i === 0 || c.dryness >= recent3[i - 1].dryness) && latest.dryness > recent3[0].dryness;
+  const dryTrend = recent3.length >= 2 && recent3.every((c, i) => i === 0 || c.dryness >= recent3[i - 1]!.dryness) && latest.dryness > recent3[0]!.dryness;
   const persistentDry = recent3.length >= 3 && recent3.every((c) => c.dryness >= 1);
   if (latest.dryness >= 1 && (dryTrend || persistentDry)) {
     const reasons = [
       dryTrend
-        ? `Dryness went from ${label(recent3[0].dryness)} to ${label(latest.dryness)} over your last ${recent3.length} check-ins.`
+        ? `Dryness went from ${label(recent3[0]!.dryness)} to ${label(latest.dryness)} over your last ${recent3.length} check-ins.`
         : `You've reported dryness in each of your last ${recent3.length} check-ins.`,
     ];
     if (profile.skinType === "dry" || profile.skinType === "sensitive") reasons.push(`Your profile says your skin is ${profile.skinType}.`);

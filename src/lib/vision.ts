@@ -27,7 +27,7 @@ export function fileToResizedDataUrl(f: File, max = 900): Promise<string> {
 }
 
 function dataUrlToBlob(u: string) {
-  const [h, b] = u.split(",");
+  const [h = "", b = ""] = u.split(",");
   const mime = h.match(/:(.*?);/)?.[1] ?? "image/jpeg";
   const bin = atob(b);
   const arr = new Uint8Array(bin.length);
@@ -74,15 +74,15 @@ export function browserQuickCheck(dataUrl: string): Promise<QualityReport> {
       const g = new Float32Array(W * H);
       let sum = 0;
       for (let i = 0; i < W * H; i++) {
-        g[i] = 0.299 * px[i * 4] + 0.587 * px[i * 4 + 1] + 0.114 * px[i * 4 + 2];
-        sum += g[i];
+        g[i] = 0.299 * px[i * 4]! + 0.587 * px[i * 4 + 1]! + 0.114 * px[i * 4 + 2]!;
+        sum += g[i]!;
       }
       const mean = sum / (W * H);
       let ls = 0, ls2 = 0, n = 0;
       for (let y = 1; y < H - 1; y++)
         for (let x = 1; x < W - 1; x++) {
           const i = y * W + x;
-          const l = g[i - W] + g[i + W] + g[i - 1] + g[i + 1] - 4 * g[i];
+          const l = g[i - W]! + g[i + W]! + g[i - 1]! + g[i + 1]! - 4 * g[i]!;
           ls += l; ls2 += l * l; n++;
         }
       const v = ls2 / n - (ls / n) ** 2;

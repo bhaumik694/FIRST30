@@ -114,7 +114,7 @@ function Dashboard() {
       <div className="grid gap-5 lg:grid-cols-3">
         <div className="space-y-3 lg:col-span-2">
           <p className="text-xs uppercase tracking-[0.2em] text-primary">Today's suggestion</p>
-          <RecCard rec={recs[0]} large />
+          {recs[0] && <RecCard rec={recs[0]} large />}
           {recs.slice(1, 3).map((r) => <RecCard key={r.id} rec={r} />)}
         </div>
         <div className="space-y-5">
