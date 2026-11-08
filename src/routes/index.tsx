@@ -8,7 +8,7 @@ import { loadDemo } from "@/lib/demo";
 import { discomfortScore, journeyDay, nextMilestone, recommend, toISODate } from "@/lib/engine";
 import { productName } from "@/lib/products";
 import { actions, useAppData, usePhotos } from "@/lib/store";
-import { COMFORT_LABELS, SEVERITY_LABELS } from "@/lib/types";
+import { COMFORT_LABELS, SEVERITY_LABELS, type AppData } from "@/lib/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +28,7 @@ function Index() {
   const data = useAppData();
   if (!data) return <div className="h-96" />;
   if (!data.profile) return <Welcome />;
-  return <Dashboard />;
+  return <Dashboard data={data} />;
 }
 
 function Welcome() {
@@ -73,8 +73,7 @@ function Welcome() {
   );
 }
 
-function Dashboard() {
-  const data = useAppData()!;
+function Dashboard({ data }: { data: AppData }) {
   const profile = data.profile!;
   const photos = usePhotos();
   const [open, setOpen] = useState(false);
