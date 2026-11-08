@@ -60,7 +60,6 @@ function PhotosPage() {
 
   async function handle(f?: File) {
     if (!f) return;
-    void 0;
     const err = validateFile(f);
     if (err) { toast.error(err); return; }
     setBusy(true);
